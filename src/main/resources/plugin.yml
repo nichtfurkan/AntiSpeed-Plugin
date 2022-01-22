@@ -1,0 +1,5 @@
+name: AntiSpeed
+version: 1.0
+author: snap20lp
+
+main: de.snap20lp.antispeed.Main

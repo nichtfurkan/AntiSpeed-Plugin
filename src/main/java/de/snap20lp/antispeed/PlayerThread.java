@@ -4,10 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class PlayerThread implements Runnable {
+public class PlayerThread implements Runnable, Listener {
 
     private final Thread thread;
     private final Player player;
@@ -15,6 +16,13 @@ public class PlayerThread implements Runnable {
     private int misses = 0, missTimer;
     private boolean isRunning = false;
 
+    public Thread getThread() {
+        return thread;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 
     public PlayerThread(Player player) {
         this.thread = new Thread(this, "PlayerThread");
@@ -90,6 +98,6 @@ public class PlayerThread implements Runnable {
     }
 
     private boolean checkIfPlayerIsValid(Player player) {
-        return player.getGameMode() != GameMode.CREATIVE && player.isOp() && player.hasPermission("antispeed.bypass");
+        return player.getGameMode() != GameMode.CREATIVE && !player.isOp() && !player.hasPermission("antispeed.bypass");
     }
 }

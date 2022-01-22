@@ -26,7 +26,7 @@ public class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        playerThreads.forEach(element -> element.getThread().interrupt());
+        playerThreads.forEach(element -> element.stopThread());
         playerThreads.clear();
         System.gc();
     }
@@ -35,7 +35,8 @@ public class Main extends JavaPlugin implements Listener {
     public void on(PlayerQuitEvent event) {
         playerThreads.forEach(element -> {
             if (element.getPlayer().getUniqueId().equals(event.getPlayer().getUniqueId())) {
-                element.getThread().interrupt();
+                element.stopThread();
+                Bukkit.getConsoleSender().sendMessage("§e["+event.getPlayer().getName()+"] Stopped Thread!");
             }
         });
     }

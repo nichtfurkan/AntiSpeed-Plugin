@@ -75,7 +75,10 @@ public class PlayerThread implements Runnable, Listener {
             return false;
         } else if (distance < 7.9 && containsPotionEffectWithLevel(PotionEffectType.SPEED, 1)) {
             return false;
-        } else return lastPlayerLocation.getBlockY() <= player.getLocation().getBlockY() + 3;
+        } else if(lastPlayerLocation.getBlockY() <= player.getLocation().getBlockY() + 3) {
+            return false;
+        }
+        return true;
     }
 
     private boolean containsPotionEffect(PotionEffectType type) {

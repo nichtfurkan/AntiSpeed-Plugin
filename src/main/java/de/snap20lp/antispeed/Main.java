@@ -34,6 +34,7 @@ public class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void on(PlayerQuitEvent event) {
         playerThreads.forEach(element -> {
+            playerThreads.remove(element);
             if (element.getPlayer().getUniqueId().equals(event.getPlayer().getUniqueId())) {
                 element.stopThread();
                 Bukkit.getConsoleSender().sendMessage("§e["+event.getPlayer().getName()+"] Stopped Thread!");

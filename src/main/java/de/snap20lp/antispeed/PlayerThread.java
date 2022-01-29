@@ -53,7 +53,6 @@ public class PlayerThread implements Runnable, Listener {
     public void run() {
         checkTimer = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
             if (lastPlayerLocation != null && checkIfPlayerIsValid(player)) {
-                double distance = lastPlayerLocation.distance(player.getLocation());
                 if (checkPlayerFailing()) {
                     PlayerFlagEvent playerFlagEvent = new PlayerFlagEvent(player,misses);
                     Bukkit.getPluginManager().callEvent(playerFlagEvent);
@@ -80,7 +79,6 @@ public class PlayerThread implements Runnable, Listener {
                         startMissTimer();
                     }
                 }
-                player.sendMessage("Current = " + distance);
                 lastPlayerLocation = null;
             } else {
                 lastPlayerLocation = player.getLocation();

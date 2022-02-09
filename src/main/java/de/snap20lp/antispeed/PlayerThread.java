@@ -59,7 +59,7 @@ public class PlayerThread implements Runnable, Listener {
                     if(!playerFlagEvent.isCancelled()) {
                         misses++;
                         Bukkit.getConsoleSender().sendMessage("§c["+player.getName()+"] got Flagged");
-                        if (misses >= 6) {
+                        if (misses >= 4) {
                             PlayerKickCheatingEvent playerKickCheatingEvent = new PlayerKickCheatingEvent(player);
                             Bukkit.getPluginManager().callEvent(playerKickCheatingEvent);
                             if(!playerKickCheatingEvent.isCancelled()) {
@@ -67,7 +67,7 @@ public class PlayerThread implements Runnable, Listener {
                                 player.kickPlayer("§cPlease stop cheating!");
                             }
                         }
-                        if (misses >= 3) {
+                        if (misses >= 2) {
                             PlayerSetBackEvent playerSetBackEvent = new PlayerSetBackEvent(player);
                             Bukkit.getPluginManager().callEvent(playerSetBackEvent);
                             if(!playerSetBackEvent.isCancelled()) {
